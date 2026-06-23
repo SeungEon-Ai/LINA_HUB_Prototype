@@ -1,4 +1,4 @@
-﻿import base64
+import base64
 from datetime import date
 from html import escape
 from pathlib import Path
@@ -143,6 +143,15 @@ def render_base_css():
     st.markdown(
         """
         <style>
+        :root {
+            --lina-left-rail-x: clamp(76px, 4vw, 104px);
+            --lina-left-rail-width: clamp(224px, 12.5vw, 260px);
+            --lina-left-reserved: clamp(360px, 22vw, 460px);
+            --lina-right-rail-x: clamp(26px, 2.2vw, 54px);
+            --lina-right-rail-width: 176px;
+            --lina-right-reserved: clamp(260px, 18vw, 380px);
+            --lina-content-max: 1120px;
+        }
         .main .block-container,
         section.main > div,
         div[data-testid="stMainBlockContainer"] {
@@ -422,8 +431,8 @@ def render_base_css():
         .interest-rail {
             position: absolute;
             top: 7.85rem;
-            left: calc(clamp(62px, 3.7vw, 82px) - ((100vw - 1320px) / 2));
-            width: clamp(178px, 10.7vw, 204px);
+            left: var(--lina-left-rail-x);
+            width: var(--lina-left-rail-width);
             box-sizing: border-box;
             z-index: 3;
             color: #1f2937;
@@ -480,8 +489,8 @@ def render_base_css():
         .st-key-interest_rail {
             position: fixed;
             top: 7.85rem;
-            left: clamp(62px, 3.7vw, 82px);
-            width: clamp(178px, 10.7vw, 204px);
+            left: var(--lina-left-rail-x);
+            width: var(--lina-left-rail-width);
             box-sizing: border-box;
             z-index: 10010;
             max-height: calc(100vh - 9.1rem);
@@ -681,16 +690,16 @@ def render_base_css():
         .event-rail {
             position: fixed;
             top: 50%;
-            right: 18px;
+            right: var(--lina-right-rail-x);
             left: auto;
-            width: 176px;
+            width: var(--lina-right-rail-width);
             z-index: 10020;
             font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
             transform: translateY(-50%);
         }
         .event-rail-card {
             display: block;
-            width: 176px;
+            width: var(--lina-right-rail-width);
             color: #111827 !important;
             text-decoration: none !important;
             border: 1px solid #e2e8f0;
@@ -702,11 +711,11 @@ def render_base_css():
         }
         .event-rail-card:hover {
             width: min(288px, calc((100vw - 1040px) / 2 - 36px));
-            transform: translateX(calc(176px - min(288px, calc((100vw - 1040px) / 2 - 36px))));
+            transform: translateX(calc(var(--lina-right-rail-width) - min(288px, calc((100vw - 1040px) / 2 - 36px))));
         }
         .customer-rail-card {
             display: block;
-            width: 176px;
+            width: var(--lina-right-rail-width);
             margin-top: .34rem;
             padding: .82rem .86rem;
             color: #111827 !important;
@@ -720,7 +729,7 @@ def render_base_css():
         }
         .customer-rail-card:hover {
             width: min(288px, calc((100vw - 1040px) / 2 - 36px));
-            transform: translateX(calc(176px - min(288px, calc((100vw - 1040px) / 2 - 36px))));
+            transform: translateX(calc(var(--lina-right-rail-width) - min(288px, calc((100vw - 1040px) / 2 - 36px))));
         }
         .customer-rail-top {
             display: flex;
@@ -792,7 +801,7 @@ def render_base_css():
         }
         .chatbot-rail-card {
             display: block;
-            width: 176px;
+            width: var(--lina-right-rail-width);
             margin-top: .34rem;
             padding: .8rem .86rem;
             color: #111827 !important;
@@ -806,7 +815,7 @@ def render_base_css():
         }
         .chatbot-rail-card:hover {
             width: min(288px, calc((100vw - 1040px) / 2 - 36px));
-            transform: translateX(calc(176px - min(288px, calc((100vw - 1040px) / 2 - 36px))));
+            transform: translateX(calc(var(--lina-right-rail-width) - min(288px, calc((100vw - 1040px) / 2 - 36px))));
         }
         .chatbot-rail-icon {
             width: 34px;
@@ -1200,13 +1209,20 @@ def render_interest_rail(active_feature):
     feature_page_width_css = ""
     if active_feature != FEATURE_KEYS["home"]:
         feature_page_width_css = """
-        .main .block-container,
-        section.main > div,
-        div[data-testid="stMainBlockContainer"] {
-            max-width: 1320px !important;
-            left: 0 !important;
-        }
-        .feature-visual-banner,
+        @media (min-width: 1381px) {
+            .main .block-container,
+            section.main > div,
+            div[data-testid="stMainBlockContainer"] {
+                width: 100vw !important;
+                max-width: none !important;
+                margin-left: calc(50% - 50vw) !important;
+                margin-right: calc(50% - 50vw) !important;
+                padding-left: var(--lina-left-reserved) !important;
+                padding-right: var(--lina-right-reserved) !important;
+                box-sizing: border-box !important;
+                left: 0 !important;
+            }
+        }        .feature-visual-banner,
         .feature-intro-card,
         .step-row,
         .saved-box,
@@ -1227,7 +1243,7 @@ def render_interest_rail(active_feature):
         div[data-testid="stForm"]:not(.st-key-dictionary_chat_surface div[data-testid="stForm"]):not(.st-key-policy_chat_surface div[data-testid="stForm"]):not(.st-key-lina_faq_ai_chat_surface div[data-testid="stForm"]),
         div[data-testid="stRadio"],
         div[data-testid="stVerticalBlockBorderWrapper"] {
-            max-width: 1160px !important;
+            max-width: var(--lina-content-max) !important;
             margin-left: auto !important;
             margin-right: auto !important;
             box-sizing: border-box !important;

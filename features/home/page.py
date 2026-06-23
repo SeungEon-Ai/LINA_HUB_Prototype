@@ -1,4 +1,4 @@
-﻿import base64
+import base64
 import html as html_module
 from datetime import date
 from pathlib import Path
@@ -136,7 +136,7 @@ setInterval(()=>show(index+1),5000);
 .home-shell {
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    padding: 0 clamp(4.5rem, calc((100vw - 1840px) / 2 + 4.5rem), 7rem) 0 clamp(20.5rem, calc((100vw - 1040px) / 4 + 107px), 23rem);
+    padding: 0 clamp(84px, 5.4vw, 124px) 0 var(--lina-left-reserved, clamp(360px, 22vw, 460px));
     font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
     color: #111827;
 }
@@ -147,7 +147,7 @@ setInterval(()=>show(index+1),5000);
     gap: 1rem;
 }
 .home-hero {
-    --home-hero-action-width: min(650px, 58%);
+    --home-hero-action-width: min(720px, 64%);
     min-height: 316px;
     border: 1px solid #e5edf7;
     border-radius: 18px;
@@ -1103,6 +1103,12 @@ setInterval(()=>show(index+1),5000);
     height: calc(100% - 64px);
     border: 0;
     background: #fff;
+}
+@media (max-width: 1380px) {
+    .home-shell {
+        padding-left: clamp(40px, 6vw, 84px);
+        padding-right: clamp(40px, 6vw, 84px);
+    }
 }
 @media (max-width: 980px) {
     .home-shell { padding-left: 1rem; padding-right: 1rem; }

@@ -1,4 +1,4 @@
-﻿import base64
+import base64
 import html
 from pathlib import Path
 
@@ -100,7 +100,7 @@ def render_feature_banner(banner_path, alt="", compact=False):
     if not banner_uri:
         return
     alt_html = html.escape(str(alt or "feature banner"), quote=True)
-    max_width = "1080px" if compact else "1160px"
+    max_width = "min(1080px, var(--lina-content-max, 1120px))" if compact else "var(--lina-content-max, 1120px)"
     margin_bottom = "8px" if compact else "8px"
     st.markdown(
         f"""
@@ -155,7 +155,8 @@ def render_feature_intro_card(text):
             word-break: keep-all !important;
             overflow-wrap: normal !important;
             padding: 9px 12px !important;
-            margin: 0 0 14px 0 !important;
+            max-width: var(--lina-content-max, 1120px) !important;
+            margin: 0 auto 14px auto !important;
             box-sizing: border-box !important;
         }}
         @media (max-width: 640px) {{
@@ -163,7 +164,7 @@ def render_feature_intro_card(text):
                 font-size: 10.5px !important;
                 line-height: 1.45 !important;
                 padding: 8px 10px !important;
-                margin: 0 0 12px 0 !important;
+                margin: 0 auto 12px auto !important;
             }}
         }}
         </style>
