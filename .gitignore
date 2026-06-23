@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+.streamlit/local_secrets.toml
+
+# Local environment
+.env
+.env.*
+*.local
+
+# Logs and runtime files
+*.log
+streamlit_*.log
+streamlit*.log
+*.pid
+*.jobid
+
+# Working/output folders from local build and crawling jobs
+work/
+outputs/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
