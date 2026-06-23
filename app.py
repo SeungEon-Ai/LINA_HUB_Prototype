@@ -319,6 +319,20 @@ def render_base_css():
             color: #111827;
             text-decoration: underline;
         }
+
+        .mobile-hub-menu,
+        .mobile-feature-menu {
+            display: none;
+        }
+        .mobile-hub-menu summary,
+        .mobile-feature-menu summary {
+            list-style: none;
+            cursor: pointer;
+        }
+        .mobile-hub-menu summary::-webkit-details-marker,
+        .mobile-feature-menu summary::-webkit-details-marker {
+            display: none;
+        }
         .hub-nav-label {
             color: #64748b;
             font-size: .78rem;
@@ -423,25 +437,157 @@ def render_base_css():
             color: #111827 !important;
         }
         @media (max-width: 900px) {
+            html,
+            body,
+            .stApp,
+            .stAppViewContainer,
+            .appview-container {
+                background: #fff !important;
+            }
             .main .block-container,
             section.main > div,
             div[data-testid="stMainBlockContainer"] {
                 left: 0;
+                max-width: none !important;
+                padding-left: .9rem !important;
+                padding-right: .9rem !important;
+                padding-top: .7rem !important;
             }
             .brand-life-wrap {
-                display: block;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100vw;
+                padding: 1.05rem .9rem .25rem;
+                margin-bottom: .35rem;
+            }
+            .brand-row {
+                margin-bottom: .2rem;
+            }
+            .brand-name {
+                font-size: clamp(1.38rem, 8vw, 1.72rem);
+                gap: .36rem;
+            }
+            .brand-name-mark {
+                width: 25px;
+                height: 25px;
+                flex-basis: 25px;
             }
             .hub-top-tabs {
-                justify-content: flex-start;
-                gap: .8rem;
-                margin-top: .4rem;
-                overflow-x: auto;
-                padding-bottom: .15rem;
+                display: none;
+            }
+            .mobile-hub-menu {
+                display: block;
+                width: min(100%, 360px);
+                margin-top: .45rem;
+                font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+            }
+            .mobile-hub-menu summary {
+                min-height: 38px;
+                border: 1px solid #dbe5f0;
+                border-radius: 999px;
+                background: #fff;
+                color: #111827;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .92rem;
+                font-weight: 900;
+                box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+            }
+            .mobile-hub-menu summary::after,
+            .mobile-feature-menu summary::after {
+                content: ">";
+                margin-left: .5rem;
+                color: #f5b51b;
+                font-weight: 950;
+                transform: rotate(90deg);
+            }
+            .mobile-hub-menu[open] summary::after,
+            .mobile-feature-menu[open] summary::after {
+                transform: rotate(-90deg);
+            }
+            .mobile-hub-menu-panel,
+            .mobile-feature-menu-panel {
+                margin-top: .5rem;
+                border: 1px solid #e2e8f0;
+                border-radius: 16px;
+                background: rgba(255, 255, 255, .98);
+                box-shadow: 0 14px 30px rgba(15, 23, 42, .08);
+                padding: .55rem;
+            }
+            .mobile-hub-menu-panel {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: .42rem;
+            }
+            .mobile-hub-menu-panel a,
+            .mobile-feature-menu-link {
+                min-height: 38px;
+                border-radius: 12px;
+                background: #f8fafc;
+                color: #334155 !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: .45rem .5rem;
+                font-size: .82rem;
+                font-weight: 850;
+                line-height: 1.2;
+                text-align: center;
+                text-decoration: none !important;
+            }
+            .mobile-hub-menu-panel a:hover,
+            .mobile-feature-menu-link:hover,
+            .mobile-feature-menu-link.active {
+                background: #fff7df;
+                color: #111827 !important;
             }
             .today-rec-row {
                 justify-content: flex-start;
                 overflow-x: auto;
                 padding-bottom: .12rem;
+            }
+            .mobile-feature-menu {
+                display: block;
+                width: 100%;
+                max-width: 720px;
+                margin: .25rem auto .75rem;
+                font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+            }
+            .mobile-feature-menu summary {
+                min-height: 42px;
+                border: 1px solid #dbe5f0;
+                border-radius: 14px;
+                background: #fff;
+                color: #111827;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .92rem;
+                font-weight: 950;
+                box-shadow: 0 8px 18px rgba(15, 23, 42, .05);
+            }
+            .mobile-feature-section + .mobile-feature-section {
+                margin-top: .72rem;
+            }
+            .mobile-feature-section-title {
+                color: #94a3b8;
+                font-size: .76rem;
+                font-weight: 900;
+                margin: .1rem .18rem .34rem;
+            }
+            .mobile-feature-links {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: .42rem;
+            }
+        }
+        @media (max-width: 430px) {
+            .mobile-feature-links,
+            .mobile-hub-menu-panel {
+                grid-template-columns: 1fr;
             }
         }
         .interest-rail {
@@ -1221,6 +1367,7 @@ def sync_feature_from_query(feature_names):
 
 
 def render_interest_rail(active_feature):
+    render_mobile_feature_menu(active_feature)
     rail_top = "11.9rem" if active_feature == FEATURE_KEYS["home"] else "11.3rem"
     feature_page_width_css = ""
     if active_feature != FEATURE_KEYS["home"]:
@@ -1334,6 +1481,38 @@ def render_interest_rail(active_feature):
                     )
 
 
+def render_mobile_feature_menu(active_feature):
+    sections_html = []
+    for section in INTEREST_SECTIONS:
+        links_html = []
+        for feature_name, label in section["items"]:
+            active_class = " active" if feature_name == active_feature else ""
+            links_html.append(
+                f'<a class="mobile-feature-menu-link{active_class}" href="{feature_url(feature_name)}" target="_self">{label}</a>'
+            )
+        sections_html.append(
+            "".join(
+                [
+                    '<div class="mobile-feature-section">',
+                    f'<div class="mobile-feature-section-title">{section["title"]}</div>',
+                    '<div class="mobile-feature-links">',
+                    "".join(links_html),
+                    "</div>",
+                    "</div>",
+                ]
+            )
+        )
+    st.markdown(
+        f"""
+        <details class="mobile-feature-menu">
+            <summary>기능 메뉴</summary>
+            <div class="mobile-feature-menu-panel">{"".join(sections_html)}</div>
+        </details>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_event_rail(active_feature):
     mini_chat_href = "?feature=lina_faq_ai&chat=1#lina-gunggeumtalk-chat"
     chat_orb_uri = image_data_uri(str(CHAT_ORB_ASSET))
@@ -1404,6 +1583,16 @@ def render_top_nav():
                 <a class="hub-top-tab" href="{feature_url('이벤트')}" target="_self">이벤트</a>
                 <a class="hub-top-tab" href="https://www.lina.co.kr/customer/consult" target="_blank">고객센터</a>
             </nav>
+            <details class="mobile-hub-menu">
+                <summary>메뉴</summary>
+                <div class="mobile-hub-menu-panel">
+                    <a href="{feature_url('AI보험용어사전')}" target="_self">보험이 궁금할때</a>
+                    <a href="{feature_url('라이프타임 계산기')}" target="_self">Fun Fun한 라이나</a>
+                    <a href="{feature_url('오늘의 직관! 미세먼지는?')}" target="_self">생활속 라이나</a>
+                    <a href="{feature_url('이벤트')}" target="_self">이벤트</a>
+                    <a href="https://www.lina.co.kr/customer/consult" target="_blank">고객센터</a>
+                </div>
+            </details>
         </div>
         """,
         unsafe_allow_html=True,
