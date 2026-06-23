@@ -152,6 +152,18 @@ def render_base_css():
             --lina-right-reserved: clamp(260px, 18vw, 380px);
             --lina-content-max: 1120px;
         }
+        @media (min-resolution: 1.75dppx) and (min-width: 1200px) and (max-width: 1500px) and (max-height: 1000px) {
+            html,
+            body {
+                overflow-x: hidden !important;
+            }
+            .stApp {
+                width: 125vw;
+                min-height: 125vh;
+                transform: scale(.8);
+                transform-origin: top left;
+            }
+        }
         .main .block-container,
         section.main > div,
         div[data-testid="stMainBlockContainer"] {
