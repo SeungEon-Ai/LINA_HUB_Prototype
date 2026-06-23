@@ -249,6 +249,20 @@ def render_base_css():
         .hub-top-tab:hover {
             color: #f5b51b !important;
         }
+        @media (min-width: 901px) {
+            div[data-testid="stMarkdownContainer"]:has(.brand-life-wrap) {
+                min-height: 6.6rem !important;
+            }
+            .brand-life-wrap {
+                position: fixed;
+                top: 2.15rem;
+                left: 0;
+                right: auto;
+                z-index: 10050;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
         .brand-row {
             display: flex;
             align-items: center;
