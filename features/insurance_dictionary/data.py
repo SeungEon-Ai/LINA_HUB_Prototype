@@ -20,11 +20,32 @@ TEXT_COLUMNS = [
     "include_hits",
 ]
 
+REQUIRED_COLUMNS = sorted(
+    set(
+        TEXT_COLUMNS
+        + [
+            "record_type",
+            "source_name",
+            "source_basis",
+            "source_url",
+            "best_definition",
+            "search_blob",
+        ]
+    )
+)
+
+
+def empty_terms() -> pd.DataFrame:
+    return pd.DataFrame(columns=REQUIRED_COLUMNS)
+
 
 @st.cache_data(show_spinner=False)
 def load_terms() -> pd.DataFrame:
+    if not DATA_PATH.exists():
+        return empty_terms()
+
     df = pd.read_csv(DATA_PATH).fillna("")
-    for col in TEXT_COLUMNS:
+    for col in REQUIRED_COLUMNS:
         if col not in df.columns:
             df[col] = ""
     df["best_definition"] = df.apply(best_definition, axis=1)
