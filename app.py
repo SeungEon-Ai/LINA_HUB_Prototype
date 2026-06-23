@@ -182,9 +182,10 @@ def render_base_css():
             overflow: visible !important;
         }
         .brand-life-wrap {
+            position: relative;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             gap: 1rem;
             min-height: 2rem;
             width: 100vw;
@@ -226,6 +227,9 @@ def render_base_css():
             color: #111827;
         }
         .hub-top-tabs {
+            position: absolute;
+            top: calc(1.35rem + .48rem);
+            right: clamp(64px, 8vw, 132px);
             display: flex;
             align-items: center;
             justify-content: flex-end;
