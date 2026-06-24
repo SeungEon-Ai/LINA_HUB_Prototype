@@ -1031,6 +1031,13 @@ setInterval(()=>show(index+1),5000);
     fill: currentColor;
 }
 
+.home-mini-chat-toggle {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
 .home-chat-orb {
     position: fixed;
     right: clamp(0px, 1.2vw, 22px);
@@ -1068,7 +1075,8 @@ setInterval(()=>show(index+1),5000);
     box-shadow: 0 18px 50px rgba(15,23,42,.20);
     display: none;
 }
-#lina-home-mini-chat:target {
+#lina-home-mini-chat:target,
+.home-mini-chat-toggle:checked ~ .home-mini-chat-panel {
     display: block;
 }
 .home-mini-chat-head {
@@ -1241,11 +1249,12 @@ setInterval(()=>show(index+1),5000);
 
     _html(
         """
-<a class="home-chat-orb" href="?feature=home&mini_chat=1" target="_self" aria-label="라이나 궁금톡 열기"><span>궁금톡</span></a>
+<input class="home-mini-chat-toggle" id="lina-home-mini-chat-toggle" type="checkbox" aria-hidden="true">
+<label class="home-chat-orb" for="lina-home-mini-chat-toggle" role="button" tabindex="0" aria-label="라이나 궁금톡 열기"><span>궁금톡</span></label>
 <div id="lina-home-mini-chat" class="home-mini-chat-panel">
     <div class="home-mini-chat-head">
         <strong>라이나 궁금톡</strong>
-        <a class="home-mini-chat-close" href="#" aria-label="상담창 닫기">×</a>
+        <label class="home-mini-chat-close" for="lina-home-mini-chat-toggle" role="button" tabindex="0" aria-label="상담창 닫기">×</label>
     </div>
     <iframe class="home-mini-chat-frame" src="?feature=lina_faq_ai&amp;mini_embed=1&amp;chat=1" scrolling="yes" title="라이나 궁금톡"></iframe>
 </div>
