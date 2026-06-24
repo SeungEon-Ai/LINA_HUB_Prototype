@@ -254,13 +254,13 @@ def render_base_css():
                 min-height: 3.2rem !important;
             }
             .brand-life-wrap {
-                position: fixed;
-                top: 2.15rem;
-                left: 0;
+                position: relative;
+                top: auto;
+                left: auto;
                 right: auto;
-                z-index: 10050;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
+                z-index: 0;
+                margin-left: calc(50% - 50vw) !important;
+                margin-right: calc(50% - 50vw) !important;
             }
         }
         .brand-row {
