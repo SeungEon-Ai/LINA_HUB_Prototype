@@ -460,8 +460,8 @@ def _fetch_news(query, source, seen_keys=None):
     if source in (SOURCE_ALL, "Naver"):
         try:
             naver_items = _fetch_priority_source(_fetch_naver_news, query)
-        except Exception as error:
-            errors.append(f"Naver \ub274\uc2a4 \uc218\uc9d1 \uc2e4\ud328: {error}")
+        except Exception:
+            naver_items = []
 
     google_items = _filter_unseen(_dedupe(google_items), seen_keys)
     naver_items = _filter_unseen(_dedupe(naver_items), seen_keys)
@@ -923,6 +923,15 @@ def _render_news_list(items, item_summaries):
             _render_news_card(item, item_summaries.get(index, ""))
 
 
+def _displayable_fetch_errors(errors):
+    hidden_tokens = ("Naver 뉴스 수집 실패", "403", "Forbidden")
+    return [
+        error
+        for error in errors
+        if not any(token in str(error) for token in hidden_tokens)
+    ]
+
+
 def render():
     _render_css()
     st.markdown(
@@ -1000,8 +1009,9 @@ def render():
         total_summary = ""
         item_summaries = {}
 
-    if errors:
-        st.warning(" / ".join(errors))
+    display_errors = _displayable_fetch_errors(errors)
+    if display_errors and not news_items:
+        st.info("현재 뉴스 출처 연결이 원활하지 않습니다. 잠시 후 다시 시도해 주세요.")
 
     if news_items:
         st.markdown(
