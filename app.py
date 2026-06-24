@@ -180,6 +180,7 @@ def render_base_css():
         div[data-testid="stMarkdownContainer"]:has(.brand-life-wrap),
         div[data-testid="stMarkdownContainer"]:has(.brand-life) {
             overflow: visible !important;
+            pointer-events: none !important;
         }
         .brand-life-wrap {
             position: relative;
@@ -198,6 +199,7 @@ def render_base_css():
             margin-left: calc(50% - 50vw);
             margin-right: calc(50% - 50vw);
             overflow: visible !important;
+            pointer-events: none;
         }
         .brand-life {
             display: flex;
@@ -245,6 +247,14 @@ def render_base_css():
             line-height: 1;
             text-decoration: none !important;
             white-space: nowrap;
+        }
+        .brand-life,
+        .brand-name,
+        .hub-top-tabs,
+        .hub-top-tab,
+        .mobile-hub-menu,
+        .mobile-hub-menu * {
+            pointer-events: auto;
         }
         .hub-top-tab:hover {
             color: #f5b51b !important;
