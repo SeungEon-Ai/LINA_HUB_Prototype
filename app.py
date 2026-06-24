@@ -251,7 +251,7 @@ def render_base_css():
         }
         @media (min-width: 901px) {
             div[data-testid="stMarkdownContainer"]:has(.brand-life-wrap) {
-                min-height: 6.6rem !important;
+                min-height: 3.2rem !important;
             }
             .brand-life-wrap {
                 position: fixed;
