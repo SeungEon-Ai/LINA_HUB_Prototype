@@ -163,10 +163,12 @@ def render_embed_chat():
     st.markdown(
         """
         <style>
-        html, body, [data-testid="stAppViewContainer"], .stApp { background:#fff !important; min-height:100vh !important; }
+        html, body { background:#fff !important; min-height:100vh !important; height:auto !important; overflow-y:auto !important; overscroll-behavior:contain; }
+        .stApp, div.stApp, [data-testid="stAppViewContainer"], div[data-testid="stAppViewContainer"] { background:#fff !important; position:relative !important; inset:auto !important; min-height:calc(100vh + 7.4rem) !important; height:auto !important; overflow-y:auto !important; }
         header, footer, #MainMenu, [data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stDecoration"], .stDeployButton, [data-testid="stStatusWidget"], .viewerBadge_container__1QSob { display:none !important; }
-        [data-testid="stAppViewContainer"] > .main { padding-top:0 !important; }
-        .block-container { min-height:100vh !important; padding: .55rem .85rem 4.8rem !important; max-width: 100% !important; }
+        [data-testid="stAppViewContainer"] > .main { padding-top:0 !important; overflow-y:visible !important; }
+        .block-container { min-height:calc(100vh + 7.4rem) !important; padding: .55rem .85rem 7.4rem !important; max-width: 100% !important; }
+        .block-container::after { content:""; display:block; height:5.8rem; }
         .mini-chat-hero {
             height: 144px;
             margin: .05rem 0 .45rem;
@@ -241,6 +243,7 @@ def render_embed_chat():
         .faq-ai-msg { margin:.38rem 0 !important; }
         .faq-ai-bubble { max-width: 94% !important; font-size: .74rem !important; line-height: 1.45 !important; }
         .faq-ai-evidence-title, .faq-list-count, .faq-page-caption { display:none !important; }
+        .faq-ai-input-spacer { height:7.2rem !important; }
         div[data-testid="stExpander"], div[data-testid="stExpanderDetails"] { display:none !important; }
         .st-key-lina_faq_ai_input input { min-height:2.55rem !important; padding:0 3.1rem 0 .9rem !important; font-size:.78rem !important; }
         .st-key-lina_faq_ai_submit { right:.28rem !important; width:2.05rem !important; }

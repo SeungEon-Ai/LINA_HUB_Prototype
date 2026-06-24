@@ -1103,6 +1103,7 @@ setInterval(()=>show(index+1),5000);
     height: calc(100% - 64px);
     border: 0;
     background: #fff;
+    overflow: auto;
 }
 @media (max-width: 1380px) {
     .home-shell {
@@ -1240,13 +1241,13 @@ setInterval(()=>show(index+1),5000);
 
     _html(
         """
-<a class="home-chat-orb" href="#lina-home-mini-chat" aria-label="라이나 궁금톡 열기"><span>궁금톡</span></a>
+<a class="home-chat-orb" href="?feature=home&mini_chat=1" target="_self" aria-label="라이나 궁금톡 열기"><span>궁금톡</span></a>
 <div id="lina-home-mini-chat" class="home-mini-chat-panel">
     <div class="home-mini-chat-head">
         <strong>라이나 궁금톡</strong>
         <a class="home-mini-chat-close" href="#" aria-label="상담창 닫기">×</a>
     </div>
-    <iframe class="home-mini-chat-frame" src="http://127.0.0.1:8501/?feature=lina_faq_ai&amp;mini_embed=1&amp;chat=1" title="라이나 궁금톡"></iframe>
+    <iframe class="home-mini-chat-frame" src="?feature=lina_faq_ai&amp;mini_embed=1&amp;chat=1" scrolling="yes" title="라이나 궁금톡"></iframe>
 </div>
 <div class="home-shell">
     <div class="home-grid">

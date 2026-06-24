@@ -1640,7 +1640,7 @@ def render_mini_chat(active_feature):
 
     feature_key = FEATURES[active_feature]["key"]
     close_href = f"?feature={quote(feature_key)}"
-    iframe_src = "http://127.0.0.1:8501/?feature=lina_faq_ai&mini_embed=1&chat=1"
+    iframe_src = "?feature=lina_faq_ai&mini_embed=1&chat=1"
 
     st.markdown(
         f"""
@@ -1683,6 +1683,7 @@ def render_mini_chat(active_feature):
             height:calc(100% - 72px);
             border:0;
             background:#fff;
+            overflow:auto;
         }}
         @media (max-width: 980px) {{
             .lina-mini-chat-panel {{ right: 16px; bottom: 18px; }}
@@ -1693,7 +1694,7 @@ def render_mini_chat(active_feature):
                 <div class="lina-mini-chat-title">라이나 궁금톡</div>
                 <a class="lina-mini-chat-close" href="{close_href}" target="_self" aria-label="상담창 닫기">×</a>
             </div>
-            <iframe class="lina-mini-chat-frame" src="{iframe_src}" title="라이나 궁금톡"></iframe>
+            <iframe class="lina-mini-chat-frame" src="{iframe_src}" scrolling="yes" title="라이나 궁금톡"></iframe>
         </section>
         """,
         unsafe_allow_html=True,
