@@ -53,7 +53,7 @@ def render():
 .carousel{{position:relative;width:100%;height:188px;border:1px solid #e5edf7;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 10px 24px rgba(15,23,42,.04)}}
 .track{{display:flex;width:300%;height:100%;transition:transform .42s ease}}
 .slide{{width:33.3333%;height:100%;display:block;background:#fff}}
-.slide img{{width:100%;height:100%;display:block;object-fit:cover;object-position:center center;background:#fff}}
+.slide img{{width:100%;height:100%;display:block;object-fit:contain;object-position:center center;background:#fff}}
 .nav{{position:absolute;top:50%;transform:translateY(-50%);z-index:5;border:0;background:transparent;color:#0f172a;font-size:1.35rem;line-height:1;font-weight:950;padding:.2rem .35rem;cursor:pointer;text-shadow:0 1px 5px rgba(255,255,255,.9)}}
 .prev{{left:.45rem}} .next{{right:.45rem}}
 .dots{{position:absolute;left:50%;bottom:.35rem;transform:translateX(-50%);display:flex;gap:.28rem;z-index:4}}
