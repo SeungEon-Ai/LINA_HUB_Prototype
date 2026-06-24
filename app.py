@@ -473,8 +473,8 @@ def render_base_css():
                 align-items: center;
                 justify-content: flex-start;
                 width: 100vw;
-                padding: 1.05rem .9rem .25rem;
-                margin-bottom: .35rem;
+                padding: 1.32rem .9rem .2rem;
+                margin-bottom: .18rem;
             }
             .brand-row {
                 margin-bottom: .2rem;
@@ -484,9 +484,9 @@ def render_base_css():
                 gap: .36rem;
             }
             .brand-name-mark {
-                width: 25px;
-                height: 25px;
-                flex-basis: 25px;
+                width: 27px;
+                height: 27px;
+                flex-basis: 27px;
             }
             .hub-top-tabs {
                 display: none;
@@ -567,7 +567,7 @@ def render_base_css():
                 display: block;
                 width: 100%;
                 max-width: 720px;
-                margin: .25rem auto .75rem;
+                margin: .12rem auto 0;
                 font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
             }
             .mobile-feature-menu summary {
@@ -596,6 +596,21 @@ def render_base_css():
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: .42rem;
+            }
+            div[data-testid="stElementContainer"]:has(.interest-rail),
+            div[data-testid="stLayoutWrapper"]:has(.st-key-interest_rail),
+            div[data-testid="stElementContainer"]:has(.event-rail) {
+                display: none !important;
+                height: 0 !important;
+                min-height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            div[data-testid="stElementContainer"]:has(.home-grid) {
+                margin-top: -64px !important;
+            }
+            div[data-testid="stElementContainer"]:has(.feature-visual-banner) {
+                margin-top: -32px !important;
             }
         }
         @media (max-width: 430px) {
