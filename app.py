@@ -177,9 +177,18 @@ def render_base_css():
             overflow: visible !important;
             left: 0;
         }
+        header[data-testid="stHeader"],
+        div[data-testid="stHeader"],
+        div[data-testid="stToolbar"],
         div[data-testid="stDecoration"],
-        div[data-testid="stStatusWidget"] {
+        div[data-testid="stStatusWidget"],
+        #MainMenu {
             display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            max-height: 0 !important;
+            pointer-events: none !important;
         }
         div[data-testid="stMarkdownContainer"]:has(.brand-life-wrap),
         div[data-testid="stMarkdownContainer"]:has(.brand-life) {
