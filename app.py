@@ -177,10 +177,18 @@ def render_base_css():
             overflow: visible !important;
             left: 0;
         }
+        div[data-testid="stDecoration"],
+        div[data-testid="stStatusWidget"] {
+            display: none !important;
+        }
         div[data-testid="stMarkdownContainer"]:has(.brand-life-wrap),
         div[data-testid="stMarkdownContainer"]:has(.brand-life) {
             overflow: visible !important;
             pointer-events: none !important;
+            border: 0 !important;
+            outline: 0 !important;
+            box-shadow: none !important;
+            background: transparent !important;
         }
         .brand-life-wrap {
             position: relative;
@@ -200,6 +208,10 @@ def render_base_css():
             margin-right: calc(50% - 50vw);
             overflow: visible !important;
             pointer-events: none;
+            border: 0;
+            outline: 0;
+            box-shadow: none;
+            background: transparent;
         }
         .brand-life {
             display: flex;
